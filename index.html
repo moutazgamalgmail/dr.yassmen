@@ -41,14 +41,7 @@ section h2{font-size:clamp(24px,3.4vw,32px);margin-bottom:8px}
 .list small{display:block;color:var(--muted);font-size:14px;line-height:1.5}
 .chips{display:flex;flex-wrap:wrap;gap:10px}
 .chips span{background:var(--soft);border-radius:999px;padding:6px 16px;font-weight:500;font-size:16px}
-.certs{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
-.certs button{padding:0;border:1px solid var(--line);border-radius:12px;background:var(--card);cursor:pointer;overflow:hidden;text-align:start;font:inherit;color:inherit}
-.certs img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top}
-.certs span{display:block;padding:10px 12px;font-size:15px;line-height:1.5;font-weight:500}
-dialog{border:0;border-radius:14px;padding:0;max-width:min(92vw,900px);background:var(--card);color:var(--ink)}
-dialog::backdrop{background:rgba(0,0,0,.6)}
-dialog img{display:block;max-width:100%;max-height:80vh;margin:0 auto}
-dialog form{padding:10px;text-align:center}
+[hidden]{display:none!important}
 .book{display:grid;grid-template-columns:.8fr 1.2fr;gap:36px;align-items:start}
 .how{margin:0;padding:0;list-style:none;display:grid;gap:14px}
 .how li{display:flex;gap:12px;color:var(--muted)}
@@ -77,16 +70,15 @@ footer{padding:36px 0 90px;color:var(--muted);font-size:15px;border-top:1px soli
 <div class="wrap">
   <header>
     <a class="logo" href="#"><span class="ttl"></span> ياسمين محمد سعيد</a>
-    <nav><a href="#about">نبذة</a><a href="#certs">الشهادات</a><a href="#book">احجز موعد</a></nav>
+    <nav><a href="#about">نبذة</a><a href="#book">احجز موعد</a></nav>
   </header>
   <div class="hero">
     <div>
       <h1>مساحة آمنة تتكلم فيها براحتك، وخطة علاج واضحة</h1>
       <p><span class="ttl"></span> ياسمين محمد سعيد، معالجة نفسية ومرشدة نفسية، تعمل بالعلاج المعرفي السلوكي والجدلي السلوكي والعلاج بالتقبل والالتزام. الجلسات سرية.</p>
       <a class="btn" href="#book">احجز موعد</a>
-      <a class="btn ghost" href="#certs">شوف الشهادات</a>
     </div>
-    <div class="portrait" id="portrait">ضع صورتها هنا</div>
+    <div class="portrait" id="portrait">ياسمين محمد سعيد</div>
   </div>
 </div>
 
@@ -117,20 +109,14 @@ footer{padding:36px 0 90px;color:var(--muted);font-size:15px;border-top:1px soli
   </div>
 </div></section>
 
-<section id="certs"><div class="wrap">
-  <h2>الشهادات والدورات</h2>
-  <p class="lead">اضغط على أي شهادة لتكبيرها.</p>
-  <div class="certs" id="certGrid"></div>
-</div></section>
-
 <section id="book"><div class="wrap">
   <h2>احجز موعدك</h2>
-  <p class="lead">اختر الخدمة واليوم والساعة، ونأكد الحجز معك على واتساب.</p>
+  <p class="lead">اختر الخدمة واليوم والساعة. كل المواعيد بتوقيت القاهرة.</p>
   <div class="book">
     <ol class="how">
       <li><b>1</b><span>املأ بياناتك واختر الميعاد المناسب.</span></li>
       <li><b>2</b><span>الحجز بيتسجل في جدول العيادة.</span></li>
-      <li><b>3</b><span>بيتفتح لك واتساب برسالة جاهزة، اضغط إرسال وخلاص.</span></li>
+      <li><b>3</b><span>بعد تأكيد التسجيل، تقدر تبعت تفاصيل الموعد على واتساب.</span></li>
     </ol>
     <form id="f" novalidate>
       <div class="row">
@@ -149,57 +135,44 @@ footer{padding:36px 0 90px;color:var(--muted);font-size:15px;border-top:1px soli
   </div>
   <div class="done" id="done">
     <h3>تم تسجيل طلب الحجز</h3>
-    <p>لو واتساب ما اتفتحش لوحده، اضغط الزرار.</p>
+    <p>تم حفظ الموعد في جدول العيادة. يمكنك التواصل عبر واتساب إذا كان متاحًا.</p>
     <a class="btn wa" id="waBtn" target="_blank" rel="noopener">افتح واتساب</a>
   </div>
 </div></section>
 
 <footer><div class="wrap" id="foot"></div></footer>
 <a class="fab" id="fab" target="_blank" rel="noopener">واتساب</a>
-<dialog id="dlg"><form method="dialog"><img id="dimg" alt=""><button class="btn" style="margin:10px 0">إغلاق</button></form></dialog>
 
 <script>
 /* ===== عدّل هنا فقط ===== */
 const CONFIG = {
   title: "أ.",                       // اللقب: "أ." أو "د." حسب المؤهل المعتمد
-  whatsapp: "201000000000",          // رقم واتساب العيادة دولي بدون + أو أصفار
+  whatsapp: "201098979465",          // رقم واتساب العيادة دولي بدون + أو أصفار
   scriptUrl: "",                     // رابط Google Apps Script (Web app)
-  address: "العنوان هنا",
+  address: "",
   closedDays: [5],                   // 0=الأحد ... 5=الجمعة ... 6=السبت
   slots: ["16:00","17:00","18:00","19:00","20:00"],
   services: ["جلسة استشارة أولى","جلسة علاج نفسي","جلسة إرشاد أطفال وشباب"],
   portrait: "",                      // مثال: "portrait.jpg"
-  certs: [
-    ["cbt-foundation","الدورة التأسيسية في العلاج المعرفي السلوكي متعدد الأبعاد، 50 ساعة، 2022"],
-    ["dbt","الدورة التأسيسية للعلاج الجدلي السلوكي، 100 ساعة، 2022"],
-    ["ptsd","برنامج علاج نفسي تكاملي لاضطرابات كرب ما بعد الصدمة، 50 ساعة، 2023"],
-    ["depression","العلاج المعرفي السلوكي للاكتئاب الأساسي، 30 ساعة، 2023"],
-    ["ocd","العلاج المعرفي والسلوكي للوسواس القهري، 30 ساعة، 2023"],
-    ["social-anxiety","العلاج المعرفي السلوكي للقلق والرهاب الاجتماعي، 30 ساعة، 2024"],
-    ["motivational-interviewing","المقابلة التحفيزية ومنع الانتكاس، 16 ساعة، 2025"],
-    ["child-protection","حماية الطفل، المجلس الثقافي البريطاني، 2013"],
-    ["youth-leadership","مدرّبة معتمدة في برنامج قيادة الشباب الرياضي، المجلس الثقافي البريطاني، 2013"],
-    ["british-council-thanks","شكر وتقدير من المجلس الثقافي البريطاني واليونيسف، 2012"]
-  ]
 };
 /* ========================= */
 const $=id=>document.getElementById(id);
 const fmt=t=>{const[h,m]=t.split(":").map(Number);return((h%12)||12)+":"+String(m).padStart(2,"0")+(h>=12?" م":" ص")};
 const wa=txt=>"https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent(txt);
 document.querySelectorAll(".ttl").forEach(e=>e.textContent=CONFIG.title);
-$("fab").href=wa("السلام عليكم، أرغب في الاستفسار عن الحجز");
-$("foot").textContent="ياسمين محمد سعيد · "+CONFIG.address;
+const hasWhatsapp = /^\d{10,15}$/.test(CONFIG.whatsapp);
+$("fab").hidden=!hasWhatsapp;
+if(hasWhatsapp) $("fab").href=wa("السلام عليكم، أرغب في الاستفسار عن الحجز");
+$("foot").textContent="ياسمين محمد سعيد"+(CONFIG.address ? " · "+CONFIG.address : "");
 if(CONFIG.portrait)$("portrait").innerHTML='<img alt="ياسمين محمد سعيد" src="'+CONFIG.portrait+'">';
 $("service").innerHTML=CONFIG.services.map(s=>"<option>"+s+"</option>").join("");
-$("certGrid").innerHTML=CONFIG.certs.map(([f,t])=>'<button type="button" data-f="'+f+'" data-t="'+t+'"><img loading="lazy" src="certs/'+f+'.jpg" alt="'+t+'"><span>'+t+'</span></button>').join("");
-$("certGrid").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;$("dimg").src="certs/"+b.dataset.f+".jpg";$("dimg").alt=b.dataset.t;$("dlg").showModal()});
-$("dlg").addEventListener("click",e=>{if(e.target===$("dlg"))$("dlg").close()});
 $("slots").innerHTML=CONFIG.slots.map((t,i)=>'<span><input type="radio" name="time" id="t'+i+'" value="'+t+'"><label for="t'+i+'">'+fmt(t)+'</label></span>').join("");
-const iso=d=>new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10);
+const iso=d=>new Intl.DateTimeFormat("en-CA",{timeZone:"Africa/Cairo",year:"numeric",month:"2-digit",day:"2-digit"}).format(d);
+const cairoMinutes=()=>{const parts=new Intl.DateTimeFormat("en-GB",{timeZone:"Africa/Cairo",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(new Date()).split(":").map(Number);return parts[0]*60+parts[1]};
 const d0=new Date();$("date").min=iso(d0);const d1=new Date(d0);d1.setDate(d1.getDate()+60);$("date").max=iso(d1);
 function refresh(){const v=$("date").value;if(!v)return;
   const closed=CONFIG.closedDays.includes(new Date(v+"T12:00:00").getDay());
-  const today=v===iso(new Date());const n=new Date().getHours()*60+new Date().getMinutes();
+  const today=v===iso(new Date());const n=cairoMinutes();
   CONFIG.slots.forEach((t,i)=>{const[h,m]=t.split(":").map(Number);const el=$("t"+i);el.disabled=closed||(today&&h*60+m<=n+30);if(el.disabled)el.checked=false});
   $("msg").className="msg";$("msg").textContent=closed?"العيادة مقفولة اليوم ده، اختر يوم تاني.":""}
 $("date").addEventListener("change",refresh);
@@ -208,17 +181,35 @@ $("f").addEventListener("submit",async e=>{
   e.preventDefault();
   const name=$("name").value.trim(),phone=$("phone").value.replace(/[^\d+]/g,""),service=$("service").value,date=$("date").value;
   const t=document.querySelector('input[name="time"]:checked');
-  if(!name)return fail("اكتب الاسم.");
-  if(phone.replace(/\D/g,"").length<10)return fail("رقم الموبايل لازم يكون 10 أرقام على الأقل.");
-  if(!date)return fail("اختر اليوم.");
-  if(!t)return fail("اختر الساعة.");
+  if($("go").disabled)return;
+  refresh();
+  if(name.length<2 || name.length>100)return fail("اكتب اسم من حرفين إلى 100 حرف.");
+  if(!/^\+?\d{10,15}$/.test(phone))return fail("رقم الموبايل لازم يكون 10 أرقام على الأقل.");
+  if(!date || date<$("date").min || date>$("date").max)return fail("اختر يوم خلال الستين يوم الجايين.");
+  if(!t || t.disabled)return fail("اختر ساعة متاحة.");
   const time=t.value;
   const dateAr=new Date(date+"T12:00:00").toLocaleDateString("ar-EG",{weekday:"long",day:"numeric",month:"long"});
   const text="السلام عليكم، أنا "+name+".\nأرغب في حجز "+service+"\nيوم "+dateAr+" الساعة "+fmt(time)+"\nموبايلي: "+phone;
   $("go").disabled=true;$("msg").className="msg";$("msg").textContent="جاري تسجيل الحجز...";
-  if(CONFIG.scriptUrl){try{await fetch(CONFIG.scriptUrl,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({name,phone,service,date,time})})}catch(err){}}
-  $("msg").textContent="";$("f").style.display="none";$("done").classList.add("on");
-  $("waBtn").href=wa(text);window.open(wa(text),"_blank","noopener");
+  try {
+    const payload={name,phone,service,date,time};
+    let result;
+    if(window.google && google.script && google.script.run){
+      result=await new Promise((resolve,reject)=>google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).bookAppointment(payload));
+    } else if(CONFIG.scriptUrl){
+      const response=await fetch(CONFIG.scriptUrl,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload),signal:AbortSignal.timeout(20000)});
+      if(!response.ok)throw new Error("HTTP failure");
+      result=await response.json();
+    } else {
+      fail("الحجز الإلكتروني غير متاح حاليًا. تواصل مع العيادة لتحديد موعد.");return;
+    }
+    if(!result || result.ok!==true){fail(result?.error || "تعذر تأكيد الحجز، حاول لاحقًا.");return;}
+    $("msg").textContent="";$("f").style.display="none";$("done").classList.add("on");
+    $("waBtn").hidden=!hasWhatsapp;
+    if(hasWhatsapp)$("waBtn").href=wa(text);
+  } catch(err){
+    fail("لم نتمكن من التحقق من تسجيل الحجز. تواصل مع العيادة قبل إعادة المحاولة.");
+  } finally { $("go").disabled=false; }
 });
 </script>
 </body>
