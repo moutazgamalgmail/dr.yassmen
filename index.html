@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>عيادة د. ياسمين</title>
+<meta name="description" content="احجزي موعدك في عيادة د. ياسمين، وشوفي نتائج حالات سابقة.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Kufi+Arabic:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F6F5; --card:#FFFFFF; --ink:#10302C; --muted:#4F6B66;
+  --brand:#1B7F74; --brand-ink:#FFFFFF; --soft:#D8EBE7; --line:#CBDDD9;
+  --wa:#1FA855; --err:#B3261E;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1F1D; --card:#142B28; --ink:#E6F2EF; --muted:#9DB8B2;
+    --brand:#3CB5A6; --brand-ink:#082320; --soft:#1B3A36; --line:#27474300;
+    --line:#274743; --wa:#2BBF68; --err:#FF8A80;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;line-height:1.8;font-size:17px}
+h1,h2,h3{font-family:"Noto Kufi Arabic","IBM Plex Sans Arabic",sans-serif;line-height:1.4;margin:0}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+:focus-visible{outline:3px solid var(--brand);outline-offset:3px}
+
+/* header */
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{font-family:"Noto Kufi Arabic",sans-serif;font-weight:700;font-size:20px;text-decoration:none}
+nav a{margin-inline-start:20px;text-decoration:none;color:var(--muted);font-weight:500}
+nav a:hover{color:var(--brand)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding:36px 0 64px}
+.hero h1{font-size:clamp(30px,5vw,50px);font-weight:700}
+.hero p{color:var(--muted);max-width:34em;margin:18px 0 28px}
+.btn{display:inline-block;border:0;border-radius:12px;padding:14px 26px;font:600 17px "IBM Plex Sans Arabic",sans-serif;cursor:pointer;text-decoration:none;background:var(--brand);color:var(--brand-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line);margin-inline-start:10px}
+.btn:disabled{opacity:.6;cursor:wait}
+.portrait{aspect-ratio:4/5;border-radius:200px 200px 24px 24px;background:linear-gradient(160deg,var(--soft),var(--brand));display:grid;place-items:center;color:var(--brand-ink);text-align:center;padding:24px;font-weight:500;overflow:hidden}
+.portrait img{width:100%;height:100%;object-fit:cover}
+.facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:28px;color:var(--muted);font-size:15px}
+.facts b{display:block;color:var(--ink);font-size:20px;font-family:"Noto Kufi Arabic",sans-serif}
+
+/* sections */
+section{padding:56px 0;border-top:1px solid var(--line)}
+section>.wrap>h2{font-size:clamp(24px,3.5vw,34px);margin-bottom:8px}
+.lead{color:var(--muted);margin:0 0 32px}
+
+/* portfolio */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.case{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line)}
+.ba div{aspect-ratio:1;background:var(--soft);display:grid;place-items:center;color:var(--muted);font-size:14px;position:relative}
+.ba div:last-child{background:#BFE0DA}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ba span{position:absolute;top:8px;inset-inline-start:8px;background:var(--card);color:var(--ink);border-radius:6px;font-size:12px;padding:0 8px;z-index:1}
+.case h3{font-size:18px;padding:14px 16px 0}
+.case p{margin:4px 0 0;padding:0 16px 16px;color:var(--muted);font-size:15px}
+
+/* booking */
+.book{display:grid;grid-template-columns:.8fr 1.2fr;gap:36px;align-items:start}
+.how{margin:0;padding:0;list-style:none;display:grid;gap:14px}
+.how li{display:flex;gap:12px;color:var(--muted)}
+.how li b{flex:none;width:30px;height:30px;border-radius:50%;background:var(--soft);color:var(--ink);display:grid;place-items:center;font-size:15px}
+form{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;display:grid;gap:16px}
+label,.lbl{font-weight:600;font-size:15px;display:block;margin-bottom:6px}
+input,select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:400 16px "IBM Plex Sans Arabic",sans-serif}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.slots{display:flex;flex-wrap:wrap;gap:8px}
+.slots input{position:absolute;opacity:0;width:0}
+.slots label{margin:0;border:1.5px solid var(--line);border-radius:10px;padding:8px 14px;cursor:pointer;font-weight:500;background:var(--bg)}
+.slots input:checked+label{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.slots input:focus-visible+label{outline:3px solid var(--brand);outline-offset:2px}
+.slots input:disabled+label{opacity:.4;cursor:not-allowed;text-decoration:line-through}
+.msg{min-height:1.6em;font-size:15px;margin:0}
+.msg.err{color:var(--err)}
+.done{display:none;text-align:center;padding:12px 0}
+.done.on{display:block}
+.done h3{margin-bottom:8px}
+.btn.wa{background:var(--wa);color:#fff;margin-top:12px}
+
+footer{padding:36px 0 90px;color:var(--muted);font-size:15px;border-top:1px solid var(--line)}
+.fab{position:fixed;inset-inline-start:18px;bottom:18px;background:var(--wa);color:#fff;border-radius:999px;padding:12px 20px;font-weight:600;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.2);z-index:5}
+
+@media(max-width:760px){
+  .hero,.book{grid-template-columns:1fr}
+  .portrait{max-width:300px;margin:0 auto;order:-1}
+  nav a:not(:last-child){display:none}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="logo" href="#">د. ياسمين</a>
+    <nav><a href="#cases">النتائج</a><a href="#book">احجزي موعد</a></nav>
+  </header>
+
+  <div class="hero">
+    <div>
+      <h1>كشف هادئ، وخطة واضحة من أول زيارة</h1>
+      <p>عيادة د. ياسمين. احجزي موعدك أونلاين في دقيقة، ويوصلنا الحجز مباشرة ونأكده معاكي على واتساب.</p>
+      <a class="btn" href="#book">احجزي موعد</a>
+      <a class="btn ghost" href="#cases">شوفي النتائج</a>
+      <div class="facts">
+        <div><b data-c="years">10+</b>سنين خبرة</div>
+        <div><b data-c="cases">1000+</b>حالة</div>
+        <div><b data-c="hours">4 – 9 م</b>مواعيد الكشف</div>
+      </div>
+    </div>
+    <div class="portrait" id="portrait">ضعي صورة الدكتورة هنا</div>
+  </div>
+</div>
+
+<section id="cases">
+  <div class="wrap">
+    <h2>نتائج حالات سابقة</h2>
+    <p class="lead">صور قبل وبعد بموافقة أصحاب الحالات.</p>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section id="book">
+  <div class="wrap">
+    <h2>احجزي موعدك</h2>
+    <p class="lead">اختاري الخدمة واليوم والساعة، وهنأكد الحجز على واتساب.</p>
+    <div class="book">
+      <ol class="how">
+        <li><b>1</b><span>املي بياناتك واختاري الميعاد المناسب.</span></li>
+        <li><b>2</b><span>الحجز بيتسجل علطول في جدول العيادة.</span></li>
+        <li><b>3</b><span>بيتفتح لك واتساب برسالة جاهزة، دوسي إرسال وخلاص.</span></li>
+      </ol>
+
+      <form id="f" novalidate>
+        <div class="row">
+          <div><label for="name">الاسم</label><input id="name" name="name" autocomplete="name" required></div>
+          <div><label for="phone">رقم الموبايل</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required></div>
+        </div>
+        <div class="row">
+          <div><label for="service">الخدمة</label><select id="service" name="service"></select></div>
+          <div><label for="date">اليوم</label><input id="date" name="date" type="date" required></div>
+        </div>
+        <div>
+          <span class="lbl" id="tl">الساعة</span>
+          <div class="slots" id="slots" role="radiogroup" aria-labelledby="tl"></div>
+        </div>
+        <p class="msg" id="msg" role="status" aria-live="polite"></p>
+        <button class="btn" id="go" type="submit">أكدي الحجز</button>
+      </form>
+    </div>
+    <div class="done" id="done">
+      <h3>تم تسجيل طلب الحجز</h3>
+      <p>لو واتساب ما اتفتحش لوحده، دوسي الزرار تحت.</p>
+      <a class="btn wa" id="waBtn" target="_blank" rel="noopener">افتحي واتساب</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap" id="foot"></div></footer>
+<a class="fab" id="fab" target="_blank" rel="noopener">واتساب</a>
+
+<script>
+/* ===== عدّلي هنا فقط ===== */
+const CONFIG = {
+  clinicName: "عيادة د. ياسمين",
+  whatsapp: "201000000000",          // رقم واتساب العيادة بالصيغة الدولية بدون + أو أصفار
+  scriptUrl: "",                      // رابط Google Apps Script بعد النشر (انظري ملف Code.gs)
+  address: "العنوان هنا",
+  closedDays: [5],                    // 0=الأحد ... 5=الجمعة ... 6=السبت
+  slots: ["16:00","17:00","18:00","19:00","20:00"],
+  services: ["كشف جديد","متابعة","استشارة"],
+  portrait: "",                       // رابط صورة الدكتورة (اختياري)
+  cases: [
+    {title:"حالة 1", note:"وصف مختصر للحالة والمدة", before:"", after:""},
+    {title:"حالة 2", note:"وصف مختصر للحالة والمدة", before:"", after:""},
+    {title:"حالة 3", note:"وصف مختصر للحالة والمدة", before:"", after:""}
+  ]
+};
+/* ========================= */
+
+const $ = id => document.getElementById(id);
+const fmtTime = t => { const [h,m]=t.split(":").map(Number); return ((h%12)||12)+":"+String(m).padStart(2,"0")+(h>=12?" م":" ص"); };
+const waLink = txt => "https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent(txt);
+
+// static content
+document.title = CONFIG.clinicName;
+$("fab").href = waLink("السلام عليكم، عايزة أستفسر عن الحجز");
+$("foot").textContent = CONFIG.clinicName + " · " + CONFIG.address;
+if (CONFIG.portrait) $("portrait").innerHTML = '<img alt="د. ياسمين" src="'+CONFIG.portrait+'">';
+$("service").innerHTML = CONFIG.services.map(s=>"<option>"+s+"</option>").join("");
+
+// portfolio
+$("grid").innerHTML = CONFIG.cases.map(c => {
+  const pic = (src,label) => '<div>'+(src?'<img loading="lazy" alt="'+label+' - '+c.title+'" src="'+src+'">':'')+'<span>'+label+'</span>'+(src?'':'صورة')+'</div>';
+  return '<article class="case"><div class="ba">'+pic(c.before,"قبل")+pic(c.after,"بعد")+'</div><h3>'+c.title+'</h3><p>'+c.note+'</p></article>';
+}).join("");
+
+// slots
+$("slots").innerHTML = CONFIG.slots.map((t,i)=>
+  '<span><input type="radio" name="time" id="t'+i+'" value="'+t+'"><label for="t'+i+'">'+fmtTime(t)+'</label></span>').join("");
+
+// date limits
+const d0 = new Date(); const iso = d => new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10);
+$("date").min = iso(d0);
+const d1 = new Date(d0); d1.setDate(d1.getDate()+60); $("date").max = iso(d1);
+
+function refreshSlots(){
+  const v = $("date").value; if(!v) return;
+  const day = new Date(v+"T12:00:00").getDay();
+  const closed = CONFIG.closedDays.includes(day);
+  const today = v === iso(new Date()); const nowM = new Date().getHours()*60+new Date().getMinutes();
+  CONFIG.slots.forEach((t,i)=>{
+    const [h,m]=t.split(":").map(Number);
+    const el = $("t"+i); el.disabled = closed || (today && h*60+m <= nowM+30);
+    if(el.disabled) el.checked=false;
+  });
+  $("msg").className="msg"; $("msg").textContent = closed ? "العيادة مقفولة اليوم ده، اختاري يوم تاني." : "";
+}
+$("date").addEventListener("change", refreshSlots);
+
+function fail(t){ $("msg").className="msg err"; $("msg").textContent=t; }
+
+$("f").addEventListener("submit", async e => {
+  e.preventDefault();
+  const name=$("name").value.trim(), phone=$("phone").value.replace(/[^\d+]/g,""), service=$("service").value, date=$("date").value;
+  const t = document.querySelector('input[name="time"]:checked');
+  if(!name) return fail("اكتبي الاسم.");
+  if(phone.replace(/\D/g,"").length < 10) return fail("رقم الموبايل لازم يكون 10 أرقام على الأقل.");
+  if(!date) return fail("اختاري اليوم.");
+  if(!t) return fail("اختاري الساعة.");
+  const time = t.value;
+  const dateAr = new Date(date+"T12:00:00").toLocaleDateString("ar-EG",{weekday:"long",day:"numeric",month:"long"});
+  const text = "السلام عليكم، أنا "+name+".\nعايزة أحجز "+service+"\nيوم "+dateAr+" الساعة "+fmtTime(time)+"\nموبايلي: "+phone;
+
+  $("go").disabled = true; $("msg").className="msg"; $("msg").textContent="جاري تسجيل الحجز...";
+  if (CONFIG.scriptUrl) {
+    try {
+      await fetch(CONFIG.scriptUrl, {method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"},
+        body: JSON.stringify({name, phone, service, date, time})});
+    } catch(err) { /* نكمل على واتساب حتى لو فشل التسجيل */ }
+  }
+  $("msg").textContent = "";
+  $("f").style.display="none"; $("done").classList.add("on");
+  $("waBtn").href = waLink(text);
+  window.open(waLink(text), "_blank", "noopener");
+});
+</script>
+</body>
+</html>
